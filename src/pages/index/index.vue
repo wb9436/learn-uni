@@ -5,7 +5,14 @@
             <text class="title">{{title}}</text>
         </view>
         <view>
-            <text class="title">{{loadTime}}</text>
+            <text class="title" @tap="pop" @touchstart="touchStart">{{loadTime}}</text>
+        </view>
+        <view>
+            <picker @change="bindPickerChange" :value="index" :range="array">
+                <view class="picker">
+                    当前选择：{{array[index]}}
+                </view>
+            </picker>
         </view>
     </view>
 </template>
@@ -18,7 +25,9 @@
         data() {
             return {
                 logoPng: LogoPng,
-                title: 'Hello'
+                title: 'Hello',
+                index: 0,
+                array: ['A', 'B', 'C']
             }
         },
         onLoad() {
@@ -29,7 +38,18 @@
                 return DateUtil.dateFormat(new Date())
             }
         },
-        methods: {}
+        methods: {
+            pop: () => {
+                alert('Hello world !!!')
+            },
+            touchStart: () => {
+                console.log('touch start')
+            },
+            bindPickerChange (e) {
+                this.index = e.detail.value
+                console.log(e.detail.value)
+            }
+        }
     }
 </script>
 
